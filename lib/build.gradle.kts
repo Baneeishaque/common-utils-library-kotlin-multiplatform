@@ -14,7 +14,7 @@ val BASE_NAME = "common_lib"
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
     jvm {
 //        jvmToolchain(20)
@@ -24,12 +24,10 @@ kotlin {
     }
 
     androidTarget {
-        publishAllLibraryVariants()
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
+        publishLibraryVariants("release", "debug")
     }
 
     mingwX64 {
@@ -51,8 +49,8 @@ kotlin {
 
     sourceSets.all {
         languageSettings.apply {
-            languageVersion = "1.9"
-            apiVersion = "1.9"
+            languageVersion = "2.4"
+            apiVersion = "2.4"
             progressiveMode = true
             optIn("ExperimentalStdlibApi,ExperimentalEncodingApi")
         }
@@ -63,7 +61,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-                implementation(platform("io.ktor:ktor-bom:3.2.0-eap-1315"))
+                implementation(project.dependencies.platform("io.ktor:ktor-bom:3.2.0-eap-1315"))
                 implementation("io.ktor:ktor-client-core")
                 implementation("io.ktor:ktor-client-auth")
                 implementation("io.ktor:ktor-client-content-negotiation")
