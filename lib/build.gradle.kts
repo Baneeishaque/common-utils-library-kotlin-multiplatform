@@ -23,11 +23,13 @@ kotlin {
         }
     }
 
-    androidTarget {
+    android {
+        namespace = "ndk.banee.common_library"
+        compileSdk = 34
+        minSdk = 24
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
-        publishLibraryVariants("release", "debug")
     }
 
     mingwX64 {
@@ -88,13 +90,5 @@ kotlin {
             }
         }*/
     }
-}
 
-android {
-    namespace = "ndk.banee.common_library"
-    compileSdk = 34
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
